@@ -1,21 +1,15 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 '''
-Script que fa una prova de mínims:
-1. Crea un serial
-2. Envia una trama
-3. Rep la resposta
-'''
-import serial
-import time
-print "+------------------------------+"
-print "| TEST SERIAL CONNECTION & SIM |"
-print "+------------------------------+"
-'''
-    Comandes AT per testing (manual Siretta)
-    ========================================
-        > Comanda
-        < Respostes possibles
+Script per fer una prova de mínims:
+    1. Crear una connexió serial
+    2. Enviar una trama
+    3. Rebre una resposta
+
+Comandes AT per testing (manual Siretta)
+========================================
+    "descripcio"
+        > "Comanda"
+        < "Respostes possibles"
 
     check serial port
         > AT
@@ -86,6 +80,10 @@ print "+------------------------------+"
         < CONNECT
         < NO CARRIER
 '''
+import serial
+print "+------------------------------+"
+print "| TEST SERIAL CONNECTION & SIM |"
+print "+------------------------------+"
 
 #obre serial
 ser=serial.Serial()
@@ -100,11 +98,11 @@ ser.dsrdtr=False
 ser.timeout=1
 ser.open()
 
+#bucle comandes/respostes
 while True:
-    trama=raw_input("Escriu comanda AT > "); #string
-    ser.write(trama+'\r'); #envia tb carriage return
-    ser.flush();
-    resposta=ser.readlines(); #array
+    trama=raw_input("Escriu comanda AT > ") #string
+    ser.write(trama+'\r') #envia tb carriage return
+    ser.flush()
+    resposta=ser.readlines() #array
     for r in resposta: 
         print "<",str(r), #without newline
-
