@@ -81,6 +81,7 @@
             < NO CARRIER
 '''
 import serial
+import time
 print "+------------------------------+"
 print "| TEST SERIAL CONNECTION & SIM |"
 print "+------------------------------+"
@@ -102,7 +103,7 @@ ser.open()
 while True:
     trama=raw_input("Escriu comanda AT > ") #string
     ser.write(trama+'\r') #envia tb carriage return
-    ser.flush()
-    resposta=ser.readlines() #array
-    for r in resposta: 
-        print "<",str(r), #without newline
+    resposta=''
+    time.sleep(1)
+    while ser.inWaiting()>0: resposta+=ser.read(1)
+    print resposta
