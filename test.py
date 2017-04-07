@@ -99,11 +99,11 @@ ser.dsrdtr=False
 ser.timeout=1
 ser.open()
 
-#bucle comandes/respostes
+#bucle comandes-respostes
 while True:
     trama=raw_input("Escriu comanda AT > ") #string
     ser.write(trama+'\r') #envia tb carriage return
-    resposta=''
     time.sleep(1)
+    resposta=''
     while ser.inWaiting()>0: resposta+=ser.read(1)
-    print resposta
+    print resposta, #sense newline
