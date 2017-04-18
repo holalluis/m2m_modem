@@ -8,9 +8,12 @@ print "+------------------------------+"
 print "| TEST SERIAL CONNECTION & SIM |"
 print "+------------------------------+"
 
+#parametres
+port="/dev/ttyS17"
+
 #obre serial
 ser=serial.Serial()
-ser.port="/dev/ttyS17"
+ser.port=port
 ser.baudrate=9600
 ser.bytesize=8
 ser.parity=serial.PARITY_EVEN
@@ -28,4 +31,4 @@ while True:
     time.sleep(1)
     resposta=''
     while ser.inWaiting()>0: resposta+=ser.read(1)
-    print resposta, #sense newline
+    if(resposta!=""): print resposta, #sense newline
