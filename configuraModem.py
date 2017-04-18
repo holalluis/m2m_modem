@@ -46,11 +46,10 @@ def comanda(cmd):
 def escolta():
     print "Escoltant modem..."
     while True:
-        resposta=ser.readlines()
-        if(len(resposta)):
+        resposta=''
+        while ser.inWaiting()>0: resposta+=ser.read(1)
+        if(resposta!=''):
             print resposta
-        else:
-            print ".",
         time.sleep(1)
 
 #script comandes at
