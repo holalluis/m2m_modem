@@ -1,18 +1,21 @@
 import socket
-BUFFER_SIZE = 1024
 
-ip_modem='95.124.201.120'
+ip_modem='88.31.159.2'
+port_modem=1024
 
-#socket
+#crea socket
 s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-s.connect((ip_modem,1024))
+s.connect((ip_modem,port_modem))
 
-print s
+if(s):
+    print s
+    print "Socket connectat a",ip_modem+":"+port_modem
 
 while True:
     missatge=raw_input("Escriu missatge (sortir: q) >> ")
     if(missatge=="q"): break
     s.send(missatge)
 
-print "sortint"
+print "Sortint..."
+s.shutdown(socket.SHUT_RDWR)
 s.close()
