@@ -14,7 +14,7 @@ port="/dev/ttyS17"
 #obre serial
 ser=serial.Serial()
 ser.port=port
-ser.baudrate=9600
+ser.baudrate=115200
 ser.bytesize=8
 ser.parity=serial.PARITY_EVEN
 ser.stopbits=1
@@ -24,6 +24,8 @@ ser.dsrdtr=False
 ser.timeout=1
 ser.open()
 
+print ser
+
 #bucle comandes-respostes
 while True:
     trama=raw_input("Escriu comanda AT > ") #string
@@ -31,4 +33,8 @@ while True:
     time.sleep(1)
     resposta=''
     while ser.inWaiting()>0: resposta+=ser.read(1)
-    if(resposta!=""): print resposta, #sense newline
+    if(resposta!=""): 
+        print resposta, #sense newline
+        if(resposta==">>> \r\n"):
+            arxiu=raw_input()
+            ser.write(arxiu)
