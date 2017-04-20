@@ -35,6 +35,3 @@ while True:
     while ser.inWaiting()>0: resposta+=ser.read(1)
     if(resposta!=""): 
         print resposta, #sense newline
-        if(resposta==">>> \r\n"):
-            arxiu=raw_input()
-            ser.write(arxiu)
